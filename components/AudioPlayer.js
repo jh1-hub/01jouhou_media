@@ -9,8 +9,10 @@ export const AudioPlayer = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // GitHub Pagesでビルドを通さず直接公開する場合、publicフォルダを含める必要があります
-    const audioPath = './public/principal_speech.mp3';
+    // スクリプトの場所を基準にパスを解決（より確実な方法）
+    const audioPath = new URL('../public/principal_speech.mp3', import.meta.url).href;
+    console.log("Attempting to load audio from:", audioPath);
+    
     audioRef.current = new Audio(audioPath);
     
     const handleEnd = () => setIsPlaying(false);
