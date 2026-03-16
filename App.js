@@ -22,9 +22,9 @@ const App = () => {
     const info = INFO_SOURCES[selectedInfo];
     
     let ContentComponent;
-    if (selectedInfo === 'A') ContentComponent = AudioPlayer;
+    if (selectedInfo === 'A') ContentComponent = SNSPost;
     else if (selectedInfo === 'B') ContentComponent = Newsletter;
-    else if (selectedInfo === 'C') ContentComponent = SNSPost;
+    else if (selectedInfo === 'C') ContentComponent = AudioPlayer;
 
     return React.createElement('div', { className: "min-h-screen pb-20 bg-slate-50" },
       React.createElement('header', { className: "bg-white/80 backdrop-blur-xl border-b border-slate-200 sticky top-0 z-50 h-20 flex items-center px-4" },

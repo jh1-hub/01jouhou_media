@@ -53,18 +53,18 @@ export const AudioPlayer = () => {
       React.createElement('div', { className: "flex flex-col items-center space-y-2 mb-6" },
         React.createElement('div', { className: "inline-flex items-center px-4 py-1.5 bg-blue-50 text-blue-700 rounded-full text-sm font-bold border border-blue-100" },
           React.createElement(Calendar, { className: "w-4 h-4 mr-2" }),
-          `発信日：${INFO_SOURCES.A.date}`
+          `発信日：${INFO_SOURCES.C.date}`
         ),
         React.createElement('div', { className: "inline-flex items-center px-4 py-1.5 bg-amber-50 text-amber-700 rounded-full text-sm font-bold border border-amber-100" },
           React.createElement(MapPin, { className: "w-4 h-4 mr-2" }),
-          `シチュエーション：${INFO_SOURCES.A.description}`
+          `シチュエーション：${INFO_SOURCES.C.description}`
         )
       ),
       React.createElement('div', { className: "w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-blue-100 relative" },
         React.createElement(Mic, { className: `w-10 h-10 text-blue-600 ${isPlaying ? 'animate-bounce' : ''}` }),
         isPlaying && React.createElement('div', { className: "absolute -inset-2 rounded-full border-4 border-blue-200 animate-ping opacity-25" })
       ),
-      React.createElement('h3', { className: "text-2xl font-bold text-gray-800 tracking-tight" }, INFO_SOURCES.A.title)
+      React.createElement('h3', { className: "text-2xl font-bold text-gray-800 tracking-tight" }, INFO_SOURCES.C.title)
     ),
     React.createElement('div', { className: "relative z-10 flex items-center justify-center space-x-6 mb-8" },
       React.createElement('button', { 

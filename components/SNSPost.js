@@ -25,7 +25,7 @@ const Reply = ({ user, id, text, color }) => (
 );
 
 export const SNSPost = () => {
-  const info = INFO_SOURCES.C;
+  const info = INFO_SOURCES.A;
   return React.createElement('div', { className: "max-w-xl mx-auto bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden" },
     React.createElement('div', { className: "p-4 border-b border-gray-50 bg-white sticky top-0 z-10 flex justify-between items-center backdrop-blur-md bg-white/90" },
        React.createElement('h4', { className: "font-black text-gray-900 text-lg" }, "ポスト"),
