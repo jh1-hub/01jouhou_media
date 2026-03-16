@@ -6,41 +6,41 @@ import { PRINCIPAL_MESSAGE, INFO_SOURCES } from '../constants.js';
 export const AudioPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
-  const utteranceRef = useRef(null);
+  const audioRef = useRef(null);
 
   useEffect(() => {
+    audioRef.current = new Audio('/principal_speech.mp3');
+    
+    const handleEnd = () => setIsPlaying(false);
+    audioRef.current.addEventListener('ended', handleEnd);
+
     return () => {
-      window.speechSynthesis.cancel();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.removeEventListener('ended', handleEnd);
+      }
     };
   }, []);
 
   const playVoice = () => {
+    if (!audioRef.current) return;
+
     if (isPlaying) {
-      window.speechSynthesis.cancel();
+      audioRef.current.pause();
       setIsPlaying(false);
-      return;
+    } else {
+      audioRef.current.play().catch(err => {
+        console.error("Audio play failed:", err);
+        setIsPlaying(false);
+      });
+      setIsPlaying(true);
     }
-
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(PRINCIPAL_MESSAGE);
-    const voices = window.speechSynthesis.getVoices();
-    const japaneseVoice = voices.find(v => v.lang.includes('ja')) || voices[0];
-    if (japaneseVoice) utterance.voice = japaneseVoice;
-    
-    utterance.pitch = 0.85;
-    utterance.rate = 0.85;
-    utterance.volume = 1.0;
-
-    utterance.onstart = () => setIsPlaying(true);
-    utterance.onend = () => setIsPlaying(false);
-    utterance.onerror = () => setIsPlaying(false);
-
-    utteranceRef.current = utterance;
-    window.speechSynthesis.speak(utterance);
   };
 
   const handleReset = () => {
-    window.speechSynthesis.cancel();
+    if (!audioRef.current) return;
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
     setIsPlaying(false);
   };
 
@@ -78,7 +78,7 @@ export const AudioPlayer = () => {
         className: `p-4 rounded-full transition-colors ${showTranscript ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`
       }, React.createElement(FileText, { className: "w-6 h-6" }))
     ),
-    React.createElement('div', { className: "text-center text-[10px] text-gray-400 font-bold mb-4" }, "端末の内蔵音声を使用して再生中"),
+    React.createElement('div', { className: "text-center text-[10px] text-gray-400 font-bold mb-4" }, "音声ファイルを再生中"),
     showTranscript && React.createElement('div', { className: "relative z-10 bg-slate-50 p-6 rounded-2xl border border-slate-200" },
       React.createElement('p', { className: "text-slate-700 text-lg italic font-medium" }, `「${PRINCIPAL_MESSAGE}」`)
     )

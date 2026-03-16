@@ -29,9 +29,16 @@ export const Newsletter = () => {
       React.createElement('div', { className: "p-8 md:p-12" },
         React.createElement('h2', { className: "text-3xl md:text-5xl font-black mb-10 text-gray-900 underline decoration-blue-600/20 underline-offset-8" }, "来年度修学旅行の行き先を再考"),
         React.createElement('div', { className: "md:columns-2 gap-12 text-lg text-gray-800" },
-          React.createElement('p', { className: "font-bold mb-6" }, NEWSLETTER_CONTENT),
-          React.createElement('div', { className: "bg-gray-100 p-3 border border-gray-200 mb-6" },
-            React.createElement('div', { className: "aspect-video bg-gray-200 flex items-center justify-center text-gray-400" }, "イメージ写真")
+          // テキストを改行コードで分割して段落として表示
+          NEWSLETTER_CONTENT.split('\n').map((paragraph, index) => 
+            paragraph ? React.createElement('p', { key: index, className: "mb-6 font-bold leading-relaxed indent-0" }, paragraph) : React.createElement('div', { key: index, className: "h-4" })
+          ),
+          React.createElement('div', { className: "bg-gray-100 p-3 border border-gray-200 mb-6 break-inside-avoid" },
+            React.createElement('div', { className: "aspect-video bg-gray-200 flex flex-col items-center justify-center text-gray-400" }, 
+              React.createElement(FileText, { className: "w-8 h-8 mb-2" }),
+              React.createElement('span', { className: "text-xs" }, "生徒アンケート案")
+            ),
+            React.createElement('p', { className: "text-[10px] text-center mt-2 text-gray-500" }, "※2学期配布予定")
           ),
           React.createElement('p', { className: "font-bold" }, "詳細は9月以降に決定する予定です。")
         )
