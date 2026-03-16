@@ -9,7 +9,10 @@ export const AudioPlayer = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    audioRef.current = new Audio('/principal_speech.mp3');
+    // GitHub Pagesなどのサブディレクトリ配下でも動作するように相対パスにする、
+    // または Vite の BASE_URL を考慮する
+    const audioPath = './principal_speech.mp3';
+    audioRef.current = new Audio(audioPath);
     
     const handleEnd = () => setIsPlaying(false);
     audioRef.current.addEventListener('ended', handleEnd);
