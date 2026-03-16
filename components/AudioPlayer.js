@@ -9,9 +9,8 @@ export const AudioPlayer = () => {
   const audioRef = useRef(null);
 
   useEffect(() => {
-    // GitHub Pagesなどのサブディレクトリ配下でも動作するように相対パスにする、
-    // または Vite の BASE_URL を考慮する
-    const audioPath = './principal_speech.mp3';
+    // GitHub Pagesでビルドを通さず直接公開する場合、publicフォルダを含める必要があります
+    const audioPath = './public/principal_speech.mp3';
     audioRef.current = new Audio(audioPath);
     
     const handleEnd = () => setIsPlaying(false);
